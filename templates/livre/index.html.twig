@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos livres!{% endblock %}
+
+{% block body %}
+    <h1>Nos livres</h1>
+    {# On affiche tous les livres avec une boucle #}
+    {% for livre in livres %}
+    {# les deux accolades permettent d'afficher les infos, on met à l'intérieur ce qu'on veut afficher #}
+    <li>{{ livre.titre }}</li>
+    {% endfor %}
+
+{% endblock %}

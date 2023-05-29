@@ -1,0 +1,48 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %}Livre index{% endblock %}
+
+{% block body %}
+
+        <div class="d-flex flex-wrap justify-content-between align-items-center">
+            <h1>Livre index</h1>
+            <a href="{{ path('app_admin_livre_new') }}" class="btn btn-success"><i class="align-middle" data-feather="plus"></i></a>
+        </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>ImageName</th>
+                <th>Slug</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for livre in livres %}
+            <tr>
+                <td>{{ livre.id }}</td>
+                <td>{{ livre.titre }}</td>
+                {# le raw enlève les balises <p> qu'on voit quand on entre le livre par le back, par le biais du plus ou create new #}
+                <td>{{ livre.description|raw }}</td>
+                <td>{{ livre.imageName }}</td>
+                <td>{{ livre.slug }}</td>
+                <td>{{ livre.updatedAt ? livre.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_livre_show', {'id': livre.id}) }}" class="btn btn-warning"><i class="align-middle" data-feather="eye"></i></a>
+                    <a href="{{ path('app_admin_livre_edit', {'id': livre.id}) }}" class="btn btn-success"><i class="align-middle" data-feather="edit-2"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

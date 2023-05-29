@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-success">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}
+
+{# Avoir le formulaire sur chacune des pages, il sera utilisé dans différentes vues 
+Notre formulaire s'est généré lors de la création du CRUD #}

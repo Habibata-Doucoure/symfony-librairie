@@ -1,0 +1,58 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %}Auteur index{% endblock %}
+
+{% block body %}
+{% for label, messages in app.flashes() %}
+    {% for message in messages %}
+        <div class="alert alert-{{success }}">
+        {{ message }}
+        </div>
+    {% endfor %}
+    {% endfor %}
+        <div class="d-flex flex-wrap justify-content-between align-items-center">    
+            <h1>Les auteurs</h1>
+            <a href="{{ path('app_admin_auteur_new') }}"class="btn btn-success"><i class="align-middle" data-feather="plus"></i></a>
+        </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Pseudo</th>
+                <th>Biographie</th>
+                <th>ImageName</th>
+                <th>Slug</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for auteur in auteurs %}
+            <tr>
+                <td>{{ auteur.id }}</td>
+                <td>{{ auteur.nom }}</td>
+                <td>{{ auteur.prenom }}</td>
+                <td>{{ auteur.pseudo }}</td>
+                <td>{{ auteur.biographie }}</td>
+                <td>{{ auteur.imageName }}</td>
+                <td>{{ auteur.slug }}</td>
+                <td>{{ auteur.updatedAt ? auteur.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_auteur_show', {'id': auteur.id}) }}" class="btn btn-warning"><i class="align-middle" data-feather="eye"></i></a>
+                    <a href="{{ path('app_admin_auteur_edit', {'id': auteur.id}) }}"class="btn btn-success"><i class="align-middle" data-feather="edit-2"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
